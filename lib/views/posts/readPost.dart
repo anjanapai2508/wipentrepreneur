@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wipentrepreneur/views/formatted-text.dart';
+import 'package:wipentrepreneur/helpers/formatted-text.dart';
 import 'package:wipentrepreneur/models/posts.dart';
 import 'package:wipentrepreneur/services/dbOperations.dart';
 import 'package:wipentrepreneur/views/posts/postHeader.dart';

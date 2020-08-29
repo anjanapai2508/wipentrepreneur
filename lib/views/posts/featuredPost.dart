@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wipentrepreneur/views/formatted-text.dart';
+import 'package:wipentrepreneur/helpers/formatted-text.dart';
 import 'package:wipentrepreneur/models/posts.dart';
 import '../../router.dart' as router;
 

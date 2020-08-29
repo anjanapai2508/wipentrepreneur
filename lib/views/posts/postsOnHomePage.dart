@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wipentrepreneur/models/posts.dart';
 import 'package:wipentrepreneur/services/dbOperations.dart';
 
-import '../formatted-text.dart';
+import '../../helpers/formatted-text.dart';
 import '../../router.dart' as router;
 
 class PostsOnHomePage extends StatelessWidget {

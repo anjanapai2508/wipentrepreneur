@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wipentrepreneur/helpers/formatted-text.dart';
 
 class AdminOperations extends StatefulWidget {
-  static const String route = '/admin';
   AdminOperations({Key key}) : super(key: key);
 
   @override
@@ -12,7 +12,17 @@ class _AdminOperationsState extends State<AdminOperations> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("Need rich text editor here"),
-    );
+        child: Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            FormattedText("Please add a text editor here", 30, Colors.black,
+                TextAlign.center),
+          ],
+        ),
+      ),
+    ));
   }
 }

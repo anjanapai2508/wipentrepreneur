@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wipentrepreneur/views/subscribeDialog.dart';
 import '../../router.dart' as router;
-import '../formatted-text.dart';
+import '../../helpers/formatted-text.dart';
 
 class HomePageHero extends StatelessWidget {
   const HomePageHero({Key key}) : super(key: key);

@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wipentrepreneur/services/dbOperations.dart';
-import 'package:wipentrepreneur/views/posts/postHeader.dart';
 
-import 'formatted-text.dart';
+import '../helpers/formatted-text.dart';
 
 class SubscribeDialog extends StatelessWidget {
   const SubscribeDialog({Key key}) : super(key: key);

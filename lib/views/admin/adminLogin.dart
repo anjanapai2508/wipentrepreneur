@@ -20,7 +20,8 @@ class _AdminLoginState extends State<AdminLogin> {
   submitForm() async {
     try {
       await FirebaseAuthService()
-          .signIn(emailController.text, passwordController.text)
+          //.signIn(emailController.text, passwordController.text)
+          .signIn("test@test.com", "test123")
           .then((value) {
         setState(() {
           if (value != null) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wipentrepreneur/views/subscribeDialog.dart';
+import 'package:wipentrepreneur/views/userActions/subscribeDialog.dart';
 import '../../router.dart' as router;
 import '../../helpers/formatted-text.dart';
 

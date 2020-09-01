@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wipentrepreneur/views/subscribeDialog.dart';
+import 'package:wipentrepreneur/views/userActions/getInTouch.dart';
+import 'package:wipentrepreneur/views/userActions/subscribeDialog.dart';
 import '../../router.dart' as router;
 import '../../helpers/formatted-text.dart';
 
@@ -93,7 +94,12 @@ class HomePageHero extends StatelessWidget {
                         color: Colors.transparent,
                         textColor: Colors.white,
                         padding: EdgeInsets.all(8.0),
-                        onPressed: () {},
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  GetInTouchDialog());
+                        },
                         child: FormattedText(
                             "Get in touch", 15, Colors.white, TextAlign.center),
                       ))

@@ -1,8 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wipentrepreneur/services/dbOperations.dart';
-
-import '../helpers/formatted-text.dart';
+import 'package:wipentrepreneur/helpers/formatted-text.dart';
+import 'package:http/http.dart' as http;
+import 'package:wipentrepreneur/keys/keys.dart' as keys;
 
 class SubscribeDialog extends StatelessWidget {
   const SubscribeDialog({Key key}) : super(key: key);
@@ -10,22 +12,40 @@ class SubscribeDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController emailController = new TextEditingController();
     final _formKey = GlobalKey<FormState>();
-
+    String confirmationText;
     String validateEmail(String value) {
       Pattern pattern =
           r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
       RegExp regex = new RegExp(pattern);
-      if (!regex.hasMatch(value))
+      if (!regex.hasMatch(value)) {
+        emailController.clear();
         return 'Please Enter a valid Email Address';
-      else
+      } else
         return null;
     }
 
-    addSubscriber(String subscriberEmail) async {
+    addSubscriber(String emailAddress) async {
       if (_formKey.currentState.validate()) {
-        await DbOperations().addSubscriber(subscriberEmail);
-        //print("Email to be saved : $emailToSave");
+        final response = await http.post(
+          'https://api.buttondown.email/v1/subscribers',
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': keys.buttonDownToken
+          },
+          body: jsonEncode(<String, String>{
+            'email': emailAddress,
+            'notes': 'testing',
+            'referrer_url': 'http://www.wipentrepreneur.com/',
+          }),
+        );
         Navigator.pop(context);
+        if (response.statusCode == 201) {
+          confirmationText =
+              "Thanks a lot for subscribing! Please check your mailbox for confirmation.";
+        } else {
+          confirmationText =
+              "Something went wrong on our side, please try again sometime later";
+        }
         showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -33,8 +53,7 @@ class SubscribeDialog extends StatelessWidget {
                 Navigator.pop(context);
               });
               return AlertDialog(
-                title: Text(
-                    "Thanks a lot for subscribing! I will see you soon..."),
+                title: Text(confirmationText),
               );
             });
       }

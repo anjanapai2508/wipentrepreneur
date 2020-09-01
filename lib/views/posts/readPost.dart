@@ -5,7 +5,8 @@ import 'package:wipentrepreneur/models/posts.dart';
 import 'package:wipentrepreneur/services/dbOperations.dart';
 import 'package:wipentrepreneur/views/posts/postHeader.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:wipentrepreneur/views/subscribeDialog.dart';
+import 'package:wipentrepreneur/views/userActions/subscribeDialog.dart';
+import 'package:easy_web_view/easy_web_view.dart';
 
 class ReadPost extends StatefulWidget {
   final Posts showPost;

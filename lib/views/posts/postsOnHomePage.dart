@@ -41,7 +41,7 @@ class PostsOnHomePage extends StatelessWidget {
                       child: Card(
                           child: Row(children: <Widget>[
                         Expanded(
-                          flex: 1,
+                          //flex: 1,
                           child: Column(children: <Widget>[
                             FormattedText("Published On", 10, Colors.black,
                                 TextAlign.center),
@@ -54,7 +54,7 @@ class PostsOnHomePage extends StatelessWidget {
                           ]),
                         ),
                         Expanded(
-                            flex: 7,
+                            flex: 6,
                             child: Column(
                               children: <Widget>[
                                 SizedBox(

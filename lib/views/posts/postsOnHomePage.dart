@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wipentrepreneur/models/posts.dart';
 import 'package:wipentrepreneur/services/dbOperations.dart';
-
+import 'package:date_format/date_format.dart';
 import '../../helpers/formatted-text.dart';
 import '../../router.dart' as router;
 
@@ -11,25 +11,19 @@ class PostsOnHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _crossAxisCount = 2;
-    var _crossAxisSpacing = 10;
-    var _screenWidth = MediaQuery.of(context).size.width;
-    var _width = (_screenWidth - ((_crossAxisCount - 1) * _crossAxisSpacing)) /
-        _crossAxisCount;
     return FutureBuilder<List<Posts>>(
       future: DbOperations().getAllPosts(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<Posts> allPosts = snapshot.data;
-          return GridView.builder(
+          return ListView.builder(
             shrinkWrap: true,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, childAspectRatio: _width / 400),
             itemCount: allPosts.length,
             itemBuilder: (context, index) {
               final Posts post = snapshot.data[index];
               bool showComments = false;
               bool showLikes = false;
+              DateTime publishedDate = DateTime.parse(post.publishedDate);
               if (post.comments != null && post.comments.length != 0) {
                 showComments = true;
               }
@@ -43,62 +37,75 @@ class PostsOnHomePage extends StatelessWidget {
                         arguments: post);
                   },
                   child: Padding(
-                      padding: EdgeInsets.all(30),
-                      child:
-                          //Card(
-                          //child:
-                          Column(children: <Widget>[
+                      padding: EdgeInsets.only(right: 30, left: 30),
+                      child: Card(
+                          child: Row(children: <Widget>[
                         Expanded(
-                          flex: 6,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                border:
-                                    Border.all(width: 5, color: Colors.grey)),
-                            child: Image.asset(
-                              'main_background.jpg',
-                            ),
-                          ),
+                          flex: 1,
+                          child: Column(children: <Widget>[
+                            FormattedText("Published On", 10, Colors.black,
+                                TextAlign.center),
+                            FormattedText(
+                                formatDate(
+                                    publishedDate, [MM, ' ', dd, ', ', yyyy]),
+                                12,
+                                Colors.black,
+                                TextAlign.center),
+                          ]),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        FormattedText(
-                            post.title, 20, Colors.black, TextAlign.center),
-                        FormattedText(
-                            post.subtitle, 15, Colors.black, TextAlign.center),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            if (showLikes)
-                              Icon(
-                                Icons.favorite,
-                                color: Colors.pink,
-                                size: 24.0,
-                                semanticLabel: 'No of likes on this post',
-                              ),
-                            if (showLikes)
-                              FormattedText(post.likes.toString(), 15,
-                                  Colors.black, TextAlign.center),
-                            SizedBox(
-                              width: 30,
-                            ),
-                            if (showComments)
-                              Icon(
-                                Icons.comment,
-                                color: Colors.black,
-                                size: 24.0,
-                                semanticLabel: 'No of comments on this post',
-                              ),
-                            if (showComments)
-                              FormattedText(post.comments.length.toString(), 15,
-                                  Colors.black, TextAlign.center),
-                          ],
-                        )
-                      ]) //),
-                      ));
+                        Expanded(
+                            flex: 7,
+                            child: Column(
+                              children: <Widget>[
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                FormattedText(post.title, 20, Colors.black,
+                                    TextAlign.center),
+                                FormattedText(post.subtitle, 15, Colors.black,
+                                    TextAlign.center),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    if (showLikes)
+                                      Icon(
+                                        Icons.favorite,
+                                        color: Colors.pink,
+                                        size: 24.0,
+                                        semanticLabel:
+                                            'No of likes on this post',
+                                      ),
+                                    if (showLikes)
+                                      FormattedText(post.likes.toString(), 15,
+                                          Colors.black, TextAlign.center),
+                                    SizedBox(
+                                      width: 30,
+                                    ),
+                                    if (showComments)
+                                      Icon(
+                                        Icons.comment,
+                                        color: Colors.black,
+                                        size: 24.0,
+                                        semanticLabel:
+                                            'No of comments on this post',
+                                      ),
+                                    if (showComments)
+                                      FormattedText(
+                                          post.comments.length.toString(),
+                                          15,
+                                          Colors.black,
+                                          TextAlign.center),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                              ],
+                            ))
+                      ]))));
             },
           );
         } else if (snapshot.hasError) {

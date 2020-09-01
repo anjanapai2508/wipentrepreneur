@@ -6,6 +6,7 @@ class Posts {
   final int likes;
   final String id;
   final String body;
+  final String publishedDate;
   Posts(this.id, this.title, this.subtitle, this.comments, this.isFeatured,
-      this.likes, this.body);
+      this.likes, this.body, this.publishedDate);
 }

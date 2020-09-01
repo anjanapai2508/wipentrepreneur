@@ -31,10 +31,16 @@ class DbOperations {
                     postComments,
                     postinDb.data()["isFeatured"],
                     postinDb.data()["Likes"],
-                    postinDb.data()["Body"]),
+                    postinDb.data()["Body"],
+                    postinDb.data()["Date"]),
                 allPosts.add(newPost),
               })
         });
+    allPosts.sort((a, b) {
+      var aDate = DateTime.parse(a.publishedDate);
+      var bDate = DateTime.parse(b.publishedDate);
+      return bDate.compareTo(aDate);
+    });
     return allPosts;
   }
 
@@ -61,7 +67,8 @@ class DbOperations {
                       commentsOnFeatured,
                       true,
                       querySnapshot.docs[0].data()['Likes'],
-                      querySnapshot.docs[0].data()['Body']),
+                      querySnapshot.docs[0].data()['Body'],
+                      querySnapshot.docs[0].data()['Date'])
                 }
             });
     return featuredPost;

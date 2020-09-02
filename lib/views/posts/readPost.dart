@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:wipentrepreneur/helpers/formatted-text.dart';
 import 'package:wipentrepreneur/models/posts.dart';
 import 'package:wipentrepreneur/services/dbOperations.dart';
 import 'package:wipentrepreneur/views/posts/postHeader.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:wipentrepreneur/views/subscribeDialog.dart';
+import 'package:wipentrepreneur/views/userActions/subscribeDialog.dart';
 
 class ReadPost extends StatefulWidget {
   final Posts showPost;
@@ -69,18 +69,18 @@ class _ReadPostState extends State<ReadPost> {
                           SizedBox(
                             height: 20,
                           ),
-                          RaisedButton(
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      SubscribeDialog());
-                            },
-                            child: Text("Subscribe"),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
+                          // RaisedButton(
+                          //   onPressed: () {
+                          //     showDialog(
+                          //         context: context,
+                          //         builder: (BuildContext context) =>
+                          //             SubscribeDialog());
+                          //   },
+                          //   child: Text("Subscribe"),
+                          // ),
+                          // SizedBox(
+                          //   height: 20,
+                          // ),
                           Row(
                             children: <Widget>[
                               Icon(
@@ -208,6 +208,10 @@ class _ReadPostState extends State<ReadPost> {
                   ])))
             ],
           ),
+          SizedBox(
+            height: 30,
+          ),
+          PostHeader(),
         ],
       ),
     );

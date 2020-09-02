@@ -33,6 +33,10 @@
 
 # Web related
 lib/generated_plugin_registrant.dart
+lib/keys
+lib/keys/keys.dart
+lib/posts/easyWebDemo.dart
+
 
 # Symbolication related
 app.*.symbols

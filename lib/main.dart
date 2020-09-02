@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase/firebase.dart' as firebase;
+import 'package:wipentrepreneur/views/admin/adminLogin.dart';
 import 'router.dart' as router;
 
 void main() => runApp(MyApp());
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
               Theme.of(context).textTheme.apply(fontFamily: 'Open Sans')),
       onGenerateRoute: router.generateRoute,
       initialRoute: '/',
+      routes: { AdminLogin.route: (context) => AdminLogin()},
     );
   }
 }

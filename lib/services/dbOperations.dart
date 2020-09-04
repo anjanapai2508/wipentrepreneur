@@ -106,4 +106,25 @@ class DbOperations {
         .doc()
         .set(newSubscriber, SetOptions(merge: true));
   }
+
+  createNewPost(
+    String body,
+    String subtitle,
+    String title,
+  ) async {
+    String formattedDate = DateFormat('yyyyMMdd').format(DateTime.now());
+    var newPost = {
+      'Body': body,
+      'Date': formattedDate,
+      'Subtitle': subtitle,
+      'Title': title,
+      'isFeatured': false,
+      'likes': 0,
+    };
+    fb
+        .firestore()
+        .collection("Posts")
+        .doc()
+        .set(newPost, SetOptions(merge: true));
+  }
 }

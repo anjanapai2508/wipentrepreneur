@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     height: 50,
                   ),
-                  PostHeader()
+                  PostHeader(showAdminOps: false)
                 ]));
               } else if (snapshot.hasError) {
                 print("Error getting featured post : ${snapshot.error}");

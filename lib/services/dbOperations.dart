@@ -90,7 +90,79 @@ class DbOperations {
         'Likes': data['Likes'],
         'Subtitle': data['Subtitle'],
         'Title': data['Title'],
-        'isFeatured': data['isFeatured']
+        'isFeatured': data['isFeatured'],
+        'Date': data['Date'],
+      };
+      postCollectionReference.doc(id).set(newData, SetOptions(merge: true));
+    });
+  }
+
+  Future<bool> onLikeButtonTapped(bool isLiked, String id) async {
+    List<String> commentsOnPost = [];
+    await postCollectionReference.doc(id).get().then((postInDb) {
+      data = postInDb.data();
+      List<dynamic> allComments = data['Comments'];
+      if (allComments != null) {
+        allComments.forEach((element) {
+          commentsOnPost.add(element);
+        });
+      }
+      int likes = data["Likes"];
+      if (isLiked) {
+        likes = likes - 1;
+      } else {
+        likes = likes + 1;
+      }
+      //int newLikes = likes;
+      print("no of likes on this post : $likes");
+      var newData = {
+        'id': data['id'],
+        'Body': data['Body'],
+        'Comments': commentsOnPost,
+        'Likes': likes,
+        'Subtitle': data['Subtitle'],
+        'Title': data['Title'],
+        'isFeatured': data['isFeatured'],
+        'Date': data['Date'],
+      };
+      postCollectionReference.doc(id).set(newData, SetOptions(merge: true));
+    });
+
+    return !isLiked;
+  }
+
+  // Future<bool> onLikeButtonTapped(bool isLiked, String id) async {
+  //   /// send your request here
+  //   // final bool success= await sendRequest();
+
+  //   /// if failed, you can do nothing
+  //   // return success? !isLiked:isLiked;
+
+  //   return !isLiked;
+  // }
+
+  addLike(String id) async {
+    List<String> commentsOnPost = [];
+    await postCollectionReference.doc(id).get().then((postInDb) {
+      data = postInDb.data();
+      List<dynamic> allComments = data['Comments'];
+      if (allComments != null) {
+        allComments.forEach((element) {
+          commentsOnPost.add(element);
+        });
+      }
+      var likes = data["Likes"];
+      int newLikes = likes + 1;
+      print("no of likes on this post : $newLikes");
+      var newData = {
+        'id': data['id'],
+        'Body': data['Body'],
+        'Comments': commentsOnPost,
+        'Likes': newLikes,
+        'Subtitle': data['Subtitle'],
+        'Title': data['Title'],
+        'isFeatured': data['isFeatured'],
+        'Date': data['Date'],
       };
       postCollectionReference.doc(id).set(newData, SetOptions(merge: true));
     });
@@ -121,10 +193,32 @@ class DbOperations {
       'isFeatured': false,
       'likes': 0,
     };
-    fb
-        .firestore()
-        .collection("Posts")
-        .doc()
-        .set(newPost, SetOptions(merge: true));
+    postCollectionReference.doc().set(newPost, SetOptions(merge: true));
+  }
+
+  Future<void> editPost(
+      String id, String postBody, String postTitle, String postSubtitle) async {
+    List<String> commentsOnPost = [];
+    print("post id : " + id);
+    await postCollectionReference.doc(id).get().then((postInDb) {
+      data = postInDb.data();
+      List<dynamic> allComments = data['Comments'];
+      if (allComments != null) {
+        allComments.forEach((element) {
+          commentsOnPost.add(element);
+        });
+      }
+      var newData = {
+        'id': data['id'],
+        'Body': postBody,
+        'Comments': commentsOnPost,
+        'Likes': data['Likes'],
+        'Subtitle': postSubtitle,
+        'Title': postTitle,
+        'isFeatured': data['isFeatured'],
+        'Date': data['Date'],
+      };
+      postCollectionReference.doc(id).set(newData, SetOptions(merge: true));
+    });
   }
 }

@@ -5,7 +5,8 @@ import '../../router.dart' as router;
 import '../../helpers/formatted-text.dart';
 
 class PostHeader extends StatelessWidget {
-  const PostHeader({Key key}) : super(key: key);
+  final showAdminOps;
+  const PostHeader({Key key, this.showAdminOps}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +80,44 @@ class PostHeader extends StatelessWidget {
                         child: FormattedText(
                             "Get in touch", 15, Colors.white, TextAlign.center),
                       )),
+                  if (showAdminOps)
+                    Padding(
+                        padding: EdgeInsets.only(left: 20),
+                        child: FlatButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                              side: BorderSide(color: Colors.white)),
+                          color: Colors.transparent,
+                          textColor: Colors.white,
+                          padding: EdgeInsets.all(8.0),
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              router.WRITE,
+                            );
+                          },
+                          child: FormattedText(
+                              "Write", 15, Colors.white, TextAlign.center),
+                        )),
+                  if (showAdminOps)
+                    Padding(
+                        padding: EdgeInsets.only(left: 20),
+                        child: FlatButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                              side: BorderSide(color: Colors.white)),
+                          color: Colors.transparent,
+                          textColor: Colors.white,
+                          padding: EdgeInsets.all(8.0),
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              router.ADMINOPS,
+                            );
+                          },
+                          child: FormattedText(
+                              "Edit", 15, Colors.white, TextAlign.center),
+                        ))
                 ],
               ))
             ],

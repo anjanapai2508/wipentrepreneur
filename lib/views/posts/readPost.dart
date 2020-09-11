@@ -197,13 +197,24 @@ class _ReadPostState extends State<ReadPost> {
                                               fontFamily: 'Roboto',
                                               fontSize: 15)),
                                       pConfig: PConfig(
+                                          linkStyle: TextStyle(
+                                            height: 2,
+                                            letterSpacing: 1.0,
+                                            color: Colors.blue,
+                                            fontSize: 20,
+                                            decoration:
+                                                TextDecoration.underline,
+                                          ),
+                                          onLinkTap: (url) {
+                                            launch(url);
+                                          },
                                           textStyle: TextStyle(
-                                        height: 2,
-                                        letterSpacing: 1.0,
-                                        color: Colors.black45,
-                                        fontSize: 20,
-                                        decoration: TextDecoration.none,
-                                      )),
+                                            height: 2,
+                                            letterSpacing: 1.0,
+                                            color: Colors.black45,
+                                            fontSize: 20,
+                                            decoration: TextDecoration.none,
+                                          )),
                                     ),
                                   )),
                             ),

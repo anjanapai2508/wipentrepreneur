@@ -1,4 +1,5 @@
 import 'package:firebase/firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:wipentrepreneur/models/posts.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:intl/intl.dart';
@@ -134,16 +135,6 @@ class DbOperations {
     return !isLiked;
   }
 
-  // Future<bool> onLikeButtonTapped(bool isLiked, String id) async {
-  //   /// send your request here
-  //   // final bool success= await sendRequest();
-
-  //   /// if failed, you can do nothing
-  //   // return success? !isLiked:isLiked;
-
-  //   return !isLiked;
-  // }
-
   addLike(String id) async {
     List<String> commentsOnPost = [];
     await postCollectionReference.doc(id).get().then((postInDb) {
@@ -195,12 +186,13 @@ class DbOperations {
       'Title': title,
       'isFeatured': false,
       'likes': 0,
+      'id': UniqueKey().toString()
     };
     postCollectionReference.doc().set(newPost, SetOptions(merge: true));
   }
 
   Future<void> editPost(
-      String id, String postBody, String postTitle, String postSubtitle) async {
+      String id, String postBody, String postSubtitle, String postTitle) async {
     List<String> commentsOnPost = [];
     print("post id : " + id);
     await postCollectionReference.doc(id).get().then((postInDb) {

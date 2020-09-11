@@ -14,28 +14,31 @@ class DbOperations {
     Posts newPost;
     List commentsInDb;
     List<String> postComments;
-    await postCollectionReference.get().then((querySnapshot) => {
-          querySnapshot.forEach((postinDb) => {
-                postComments = [],
-                commentsInDb = postinDb.data()["Comments"],
-                if (commentsInDb != null && commentsInDb.length != 0)
-                  {
-                    commentsInDb.forEach((comment) {
-                      postComments.add(comment);
-                    })
-                  },
-                newPost = new Posts(
-                    postinDb.id,
-                    postinDb.data()["Title"],
-                    postinDb.data()["Subtitle"],
-                    postComments,
-                    postinDb.data()["isFeatured"],
-                    postinDb.data()["Likes"],
-                    postinDb.data()["Body"],
-                    postinDb.data()["Date"]),
-                allPosts.add(newPost),
-              })
-        });
+    await postCollectionReference
+        .where("isFeatured", '==', false)
+        .get()
+        .then((querySnapshot) => {
+              querySnapshot.forEach((postinDb) => {
+                    postComments = [],
+                    commentsInDb = postinDb.data()["Comments"],
+                    if (commentsInDb != null && commentsInDb.length != 0)
+                      {
+                        commentsInDb.forEach((comment) {
+                          postComments.add(comment);
+                        })
+                      },
+                    newPost = new Posts(
+                        postinDb.id,
+                        postinDb.data()["Title"],
+                        postinDb.data()["Subtitle"],
+                        postComments,
+                        postinDb.data()["isFeatured"],
+                        postinDb.data()["Likes"],
+                        postinDb.data()["Body"],
+                        postinDb.data()["Date"]),
+                    allPosts.add(newPost),
+                  })
+            });
     allPosts.sort((a, b) {
       var aDate = DateTime.parse(a.publishedDate);
       var bDate = DateTime.parse(b.publishedDate);

@@ -57,17 +57,17 @@ class FeaturedPost extends StatelessWidget {
                           ),
                           FormattedText(featuredPost.likes.toString(), 15,
                               Colors.black, TextAlign.center),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Icon(
-                            Icons.comment,
-                            color: Colors.black,
-                            size: 24.0,
-                            semanticLabel: 'No of comments on this post',
-                          ),
-                          FormattedText(featuredPost.comments.length.toString(),
-                              15, Colors.black, TextAlign.center),
+                          // SizedBox(
+                          //   width: 30,
+                          // ),
+                          // Icon(
+                          //   Icons.comment,
+                          //   color: Colors.black,
+                          //   size: 24.0,
+                          //   semanticLabel: 'No of comments on this post',
+                          // ),
+                          // FormattedText(featuredPost.comments.length.toString(),
+                          //     15, Colors.black, TextAlign.center),
                         ],
                       )
                     ]),

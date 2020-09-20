@@ -22,7 +22,7 @@ class AdminOperations extends StatelessWidget {
         height: 20,
       ),
       FutureBuilder<List<Posts>>(
-        future: DbOperations().getAllPosts(),
+        future: DbOperations().getAllPoststoEdit(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Posts> allPosts = snapshot.data;

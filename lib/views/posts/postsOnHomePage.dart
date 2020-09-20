@@ -11,7 +11,7 @@ class PostsOnHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Posts>>(
-      future: DbOperations().getAllPosts(),
+      future: DbOperations().getAllPosts(false, false),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data.length == 0) {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase/firebase.dart' as firebase;
 import 'package:wipentrepreneur/views/admin/adminLogin.dart';
+import 'package:wipentrepreneur/views/tech/showTechPostsSubPage.dart';
+import 'package:wipentrepreneur/views/tech/showTechPostsMainPage.dart';
 import 'router.dart' as router;
 import 'package:wipentrepreneur/keys/keys.dart' as keys;
 
@@ -29,7 +31,11 @@ class MyApp extends StatelessWidget {
               Theme.of(context).textTheme.apply(fontFamily: 'Open Sans')),
       onGenerateRoute: router.generateRoute,
       initialRoute: '/',
-      routes: {AdminLogin.route: (context) => AdminLogin()},
+      routes: {
+        AdminLogin.route: (context) => AdminLogin(),
+        ShowTechPostsMainPage.route: (context) => ShowTechPostsMainPage(),
+        ShowTechPostsSubPage.route: (context) => ShowTechPostsSubPage(),
+      },
     );
   }
 }

@@ -13,13 +13,19 @@ class CreatePost extends StatefulWidget {
   _CreatePostState createState() => _CreatePostState();
 }
 
+//enum SingingCharacter { lafayette, jefferson }
+
 class _CreatePostState extends State<CreatePost> {
   String postBody = "Preview will appear here..";
+  // SingingCharacter _character = SingingCharacter.lafayette;
+  bool isTech = true;
 
   @override
   Widget build(BuildContext context) {
     TextEditingController titleController = new TextEditingController();
     TextEditingController subtitleController = new TextEditingController();
+    TextEditingController techNameController = new TextEditingController();
+
     return SingleChildScrollView(
         child: Column(children: <Widget>[
       PostHeader(
@@ -49,6 +55,43 @@ class _CreatePostState extends State<CreatePost> {
               ),
               InputWidget(
                   10, 10, false, "Enter Post Subtitle", subtitleController),
+              InputWidget(10, 10, false, "Enter Tech Name", techNameController),
+              Material(
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  FormattedText(
+                      "Tech blog?", 15, Colors.black, TextAlign.center),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Radio(
+                    value: true,
+                    groupValue: isTech,
+                    onChanged: (bool value) {
+                      print("Radio value changes for 1");
+                      setState(() {
+                        isTech = value;
+                      });
+                    },
+                  ),
+                  FormattedText("True", 15, Colors.black, TextAlign.center),
+                  Radio(
+                    value: false,
+                    groupValue: isTech,
+                    onChanged: (bool value) {
+                      print("Radio value changes for 2");
+                      setState(() {
+                        isTech = value;
+                      });
+                    },
+                  ),
+                  FormattedText("False", 15, Colors.black, TextAlign.center),
+                ],
+              )),
+              SizedBox(
+                height: 30,
+              ),
               Container(
                   height: MediaQuery.of(context).size.height - 150,
                   child: Material(
@@ -80,7 +123,11 @@ class _CreatePostState extends State<CreatePost> {
               RaisedButton(
                 onPressed: () {
                   DbOperations().createNewPost(
-                      postBody, subtitleController.text, titleController.text);
+                      postBody,
+                      subtitleController.text,
+                      titleController.text,
+                      isTech,
+                      techNameController.text);
                   subtitleController.clear();
                   titleController.clear();
                   postBody = "Preview will appear here..";

@@ -197,11 +197,13 @@ class _ReadPostState extends State<ReadPost> {
                                               fontFamily: 'Roboto',
                                               fontSize: 15)),
                                       pConfig: PConfig(
+                                          textConfig: TextConfig(
+                                              textAlign: TextAlign.left),
                                           linkStyle: TextStyle(
-                                            height: 2,
-                                            letterSpacing: 1.0,
+                                            fontFamily: 'Roboto',
+                                            height: 1.5,
                                             color: Colors.blue,
-                                            fontSize: 20,
+                                            fontSize: 18,
                                             decoration:
                                                 TextDecoration.underline,
                                           ),
@@ -209,10 +211,10 @@ class _ReadPostState extends State<ReadPost> {
                                             launch(url);
                                           },
                                           textStyle: TextStyle(
-                                            height: 2,
-                                            letterSpacing: 1.0,
+                                            fontFamily: 'Roboto',
+                                            height: 1.5,
                                             color: Colors.black45,
-                                            fontSize: 20,
+                                            fontSize: 18,
                                             decoration: TextDecoration.none,
                                           )),
                                     ),

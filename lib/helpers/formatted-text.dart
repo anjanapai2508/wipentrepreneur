@@ -15,6 +15,7 @@ class FormattedText extends StatelessWidget {
     return Text(
       title,
       textAlign: alignment,
+      maxLines: 3,
       style: GoogleFonts.openSans(
         textStyle: TextStyle(
             color: textColor,

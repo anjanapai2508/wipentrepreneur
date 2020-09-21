@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wipentrepreneur/views/userActions/getInTouch.dart';
-import 'package:wipentrepreneur/views/userActions/subscribeDialog.dart';
-import '../../router.dart' as router;
+
 import '../../helpers/formatted-text.dart';
 
 class HomePageHero extends StatelessWidget {
@@ -11,7 +9,7 @@ class HomePageHero extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Container(
-          height: 300,
+          height: 150,
           width: MediaQuery.of(context).size.width,
           child: Stack(
             children: [
@@ -22,103 +20,41 @@ class HomePageHero extends StatelessWidget {
                 color: Colors.black.withOpacity(0.2),
                 colorBlendMode: BlendMode.softLight,
               )),
-              Positioned.fill(
+              Container(
+                height: 150,
+                child: Center(
                   child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  FittedBox(
-                    fit: BoxFit.fill,
-                    child: FormattedText("The WIP Entrepreneur", 70,
-                        Colors.white, TextAlign.center),
+                    children: <Widget>[
+                      Expanded(
+                          flex: 7,
+                          child: Padding(
+                              padding: EdgeInsets.all(20),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  FittedBox(
+                                    fit: BoxFit.fitWidth,
+                                    child: FormattedText("The WIP Entrepreneur",
+                                        50, Colors.white, TextAlign.center),
+                                  ),
+                                  FittedBox(
+                                    fit: BoxFit.fitWidth,
+                                    child: FormattedText(
+                                        "Trying to make something out of nothing!",
+                                        20,
+                                        Colors.white,
+                                        TextAlign.center),
+                                  )
+                                ],
+                              )
+
+                              // child: FormattedText("The WIP Entrepreneur", 70,
+                              //     Colors.white, TextAlign.center),
+                              )),
+                    ],
                   ),
-                  FittedBox(
-                    fit: BoxFit.fill,
-                    child: FormattedText(
-                        "Trying to make something out of nothing!",
-                        25,
-                        Colors.white,
-                        TextAlign.center),
-                  ),
-                ],
-              )),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  SizedBox(
-                    height: 280,
-                  ),
-                  Padding(
-                      padding: EdgeInsets.only(left: 40),
-                      child: FlatButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            side: BorderSide(color: Colors.white)),
-                        color: Colors.transparent,
-                        textColor: Colors.white,
-                        padding: EdgeInsets.all(8.0),
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            router.HOME,
-                          );
-                        },
-                        child: FormattedText(
-                            "Home", 15, Colors.white, TextAlign.center),
-                      )),
-                  Padding(
-                      padding: EdgeInsets.only(left: 20),
-                      child: FlatButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            side: BorderSide(color: Colors.white)),
-                        color: Colors.transparent,
-                        textColor: Colors.white,
-                        padding: EdgeInsets.all(8.0),
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) =>
-                                  SubscribeDialog());
-                        },
-                        child: FormattedText(
-                            "Subscribe", 15, Colors.white, TextAlign.center),
-                      )),
-                  Padding(
-                      padding: EdgeInsets.only(left: 20),
-                      child: FlatButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            side: BorderSide(color: Colors.white)),
-                        color: Colors.transparent,
-                        textColor: Colors.white,
-                        padding: EdgeInsets.all(8.0),
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) =>
-                                  GetInTouchDialog());
-                        },
-                        child: FormattedText(
-                            "Get in touch", 15, Colors.white, TextAlign.center),
-                      )),
-                  Padding(
-                      padding: EdgeInsets.only(left: 20),
-                      child: FlatButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            side: BorderSide(color: Colors.white)),
-                        color: Colors.transparent,
-                        textColor: Colors.white,
-                        padding: EdgeInsets.all(8.0),
-                        onPressed: () {
-                          Navigator.pushNamed(context, router.TECHBLOGSMAIN);
-                        },
-                        child: FormattedText(
-                            "Tech Blogs", 15, Colors.white, TextAlign.center),
-                      ))
-                ],
+                ),
               )
             ],
           )),

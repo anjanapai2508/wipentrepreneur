@@ -28,16 +28,17 @@ class _PostLayoutPhoneState extends State<PostLayoutPhone> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
+    return SingleChildScrollView(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
           Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                    height: MediaQuery.of(context).size.height,
+                    height: MediaQuery.of(context).size.height * 0.8,
                     child: MarkdownWidget(
                       data: widget.showPost.body,
                       styleConfig: StyleConfig(
@@ -162,6 +163,6 @@ class _PostLayoutPhoneState extends State<PostLayoutPhone> {
                   ],
                 ),
               ])
-        ]);
+        ]));
   }
 }

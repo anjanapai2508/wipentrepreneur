@@ -12,16 +12,18 @@ class FormattedText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      title,
-      textAlign: alignment,
-      maxLines: 3,
-      style: GoogleFonts.openSans(
-        textStyle: TextStyle(
-            color: textColor,
-            fontSize: textSize,
-            decoration: TextDecoration.none),
-      ),
-    );
+    return FittedBox(
+        fit: BoxFit.fitWidth,
+        child: Text(
+          title,
+          textAlign: alignment,
+          maxLines: 3,
+          style: GoogleFonts.openSans(
+            textStyle: TextStyle(
+                color: textColor,
+                fontSize: textSize,
+                decoration: TextDecoration.none),
+          ),
+        ));
   }
 }

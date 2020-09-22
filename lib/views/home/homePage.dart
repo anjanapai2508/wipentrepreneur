@@ -39,36 +39,30 @@ class _HomePageState extends State<HomePage> {
               )
             : null,
         drawer: CustomDrawer(),
-        body: FutureBuilder<Posts>(
-            future: DbOperations().getFeaturedPost(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return SingleChildScrollView(
-                    child: Column(children: [
-                  if (isSmallScreen) HomePageHero() else HomePageHeroDesktop(),
-                  FeaturedPost(
+        body: SingleChildScrollView(
+            child: Column(children: [
+          if (isSmallScreen) HomePageHero() else HomePageHeroDesktop(),
+          FutureBuilder<Posts>(
+              future: DbOperations().getFeaturedPost(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return FeaturedPost(
                     featuredPost: snapshot.data,
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  PostsOnHomePage(),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  if (isSmallScreen)
-                    HomePageHero()
-                  else
-                    PostHeader(showAdminOps: false)
-                ]));
-              } else if (snapshot.hasError) {
-                print("Error getting featured post : ${snapshot.error}");
-                return Text(
-                    "Sorry we are unable to process your request right now, try again in a few minutes");
-              }
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }));
+                  );
+                } else if (snapshot.hasError) {
+                  print("Error getting featured post : ${snapshot.error}");
+                  return Text(
+                      "Sorry we are unable to process your request right now, try again in a few minutes");
+                }
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }),
+          PostsOnHomePage(),
+          SizedBox(
+            height: 50,
+          ),
+          if (isSmallScreen) HomePageHero() else PostHeader(showAdminOps: false)
+        ])));
   }
 }

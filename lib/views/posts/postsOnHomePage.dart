@@ -10,6 +10,7 @@ class PostsOnHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isSmallScreen = MediaQuery.of(context).size.width < 600 ? true : false;
     return FutureBuilder<List<Posts>>(
       future: DbOperations().getAllPosts(false, false),
       builder: (context, snapshot) {
@@ -39,25 +40,25 @@ class PostsOnHomePage extends StatelessWidget {
                       Navigator.pushNamed(context, router.READ_POST,
                           arguments: post);
                     },
-                    child: Padding(
-                        padding: EdgeInsets.only(right: 30, left: 30),
-                        child: Card(
-                            child: Row(children: <Widget>[
-                          Expanded(
-                            //flex: 1,
-                            child: Column(children: <Widget>[
-                              FormattedText("Published On", 10, Colors.black,
-                                  TextAlign.center),
-                              FormattedText(
-                                  formatDate(
-                                      publishedDate, [MM, ' ', dd, ', ', yyyy]),
-                                  12,
-                                  Colors.black,
-                                  TextAlign.center),
-                            ]),
-                          ),
-                          Expanded(
-                              flex: 6,
+                    child: Card(
+                        child: Row(children: <Widget>[
+                      if (!isSmallScreen)
+                        Expanded(
+                          child: Column(children: <Widget>[
+                            FormattedText("Published On", 10, Colors.black,
+                                TextAlign.center),
+                            FormattedText(
+                                formatDate(
+                                    publishedDate, [MM, ' ', dd, ', ', yyyy]),
+                                12,
+                                Colors.black,
+                                TextAlign.center),
+                          ]),
+                        ),
+                      Expanded(
+                          flex: 6,
+                          child: Padding(
+                              padding: EdgeInsets.only(left: 20, right: 20),
                               child: Column(
                                 children: <Widget>[
                                   SizedBox(
@@ -107,8 +108,9 @@ class PostsOnHomePage extends StatelessWidget {
                                     height: 20,
                                   ),
                                 ],
-                              ))
-                        ]))));
+                              )))
+                    ])));
+                //);
               },
             );
           }
@@ -116,7 +118,7 @@ class PostsOnHomePage extends StatelessWidget {
           return Text("${snapshot.error}");
         }
         return Center(
-          child: CircularProgressIndicator(),
+          child: Text(""),
         );
       },
     );

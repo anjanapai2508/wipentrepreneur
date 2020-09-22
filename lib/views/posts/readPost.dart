@@ -52,7 +52,7 @@ class _ReadPostState extends State<ReadPost> {
             child: Column(children: <Widget>[
           PostHeader(showAdminOps: false),
           Padding(
-              padding: EdgeInsets.only(right: 30, left: 30),
+              padding: EdgeInsets.only(right: 15, left: 15),
               child: Column(
                 children: <Widget>[
                   FormattedText(widget.showPost.title, 50, Colors.black,

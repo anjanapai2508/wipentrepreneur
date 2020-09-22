@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wipentrepreneur/views/home/customDrawer.dart';
 import 'package:wipentrepreneur/views/userActions/getInTouch.dart';
 import 'package:wipentrepreneur/views/userActions/subscribeDialog.dart';
-import '../../router.dart' as router;
+
 import '../../helpers/formatted-text.dart';
+import '../../router.dart' as router;
 
 class PostHeader extends StatelessWidget {
   final showAdminOps;
@@ -11,12 +11,10 @@ class PostHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
     bool isSmallScreen = MediaQuery.of(context).size.width < 600 ? true : false;
     return Container(
       child: Container(
-          height: 100,
+          height: 60,
           width: MediaQuery.of(context).size.width,
           child: Stack(
             children: [

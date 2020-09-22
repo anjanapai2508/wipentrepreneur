@@ -32,140 +32,136 @@ class _PostLayoutPhoneState extends State<PostLayoutPhone> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                    height: MediaQuery.of(context).size.height,
+                    child: MarkdownWidget(
+                      data: widget.showPost.body,
+                      styleConfig: StyleConfig(
+                        preConfig: PreConfig(
+                            textStyle:
+                                TextStyle(fontFamily: 'Roboto', fontSize: 15)),
+                        pConfig: PConfig(
+                            textConfig: TextConfig(textAlign: TextAlign.left),
+                            linkStyle: TextStyle(
+                              fontFamily: 'Roboto',
+                              height: 1.5,
+                              color: Colors.blue,
+                              fontSize: 18,
+                              decoration: TextDecoration.underline,
+                            ),
+                            onLinkTap: (url) {
+                              launch(url);
+                            },
+                            textStyle: TextStyle(
+                              fontFamily: 'Roboto',
+                              height: 1.5,
+                              color: Colors.black45,
+                              fontSize: 18,
+                              decoration: TextDecoration.none,
+                            )),
+                      ),
+                    )),
+                SizedBox(
+                  height: 20,
+                ),
+                FormattedText("-The WIP Entrepreneur", 20, Colors.black,
+                    TextAlign.center),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
                   children: <Widget>[
-                    Container(
-                        height: MediaQuery.of(context).size.height,
-                        child: MarkdownWidget(
-                          data: widget.showPost.body,
-                          styleConfig: StyleConfig(
-                            preConfig: PreConfig(
-                                textStyle: TextStyle(
-                                    fontFamily: 'Roboto', fontSize: 15)),
-                            pConfig: PConfig(
-                                textConfig:
-                                    TextConfig(textAlign: TextAlign.left),
-                                linkStyle: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  height: 1.5,
-                                  color: Colors.blue,
-                                  fontSize: 18,
-                                  decoration: TextDecoration.underline,
-                                ),
-                                onLinkTap: (url) {
-                                  launch(url);
-                                },
-                                textStyle: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  height: 1.5,
-                                  color: Colors.black45,
-                                  fontSize: 18,
-                                  decoration: TextDecoration.none,
-                                )),
+                    Flexible(
+                      flex: 2,
+                      child: IconButton(
+                        icon: Image.asset('phone_donate.png'),
+                        onPressed: () {
+                          donate(
+                              "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=UMG6565EH4QKC&currency_code=CAD&source=url");
+                        },
+                        tooltip: "Buy me a coffee",
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Flexible(
+                        flex: 2,
+                        child: Container(
+                          child: IconButton(
+                            icon: Image.asset(
+                                'subscribe_phone.png'), //Icons made by <a href="https://www.flaticon.com/authors/alfredo-hernandez" title="Alfredo Hernandez">Alfredo Hernandez</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      SubscribeDialog());
+                            },
+                            tooltip: "Subscribe",
                           ),
                         )),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    FormattedText("-The WIP Entrepreneur", 20, Colors.black,
-                        TextAlign.center),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Flexible(
-                          flex: 2,
-                          child: IconButton(
-                            icon: Image.asset('phone_donate.png'),
-                            onPressed: () {
-                              donate(
-                                  "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=UMG6565EH4QKC&currency_code=CAD&source=url");
-                            },
-                            tooltip: "Buy me a coffee",
-                          ),
+                    Flexible(
+                      flex: 2,
+                      child: LikeButton(
+                        onTap: (isLiked) {
+                          return DbOperations()
+                              .onLikeButtonTapped(isLiked, widget.showPost.id);
+                        },
+                        size: 40,
+                        circleColor:
+                            CircleColor(start: Colors.red, end: Colors.pink),
+                        bubblesColor: BubblesColor(
+                          dotPrimaryColor: Colors.pink,
+                          dotSecondaryColor: Colors.pink,
                         ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Flexible(
-                            flex: 2,
-                            child: Container(
-                              child: IconButton(
-                                icon: Image.asset(
-                                    'subscribe_phone.png'), //Icons made by <a href="https://www.flaticon.com/authors/alfredo-hernandez" title="Alfredo Hernandez">Alfredo Hernandez</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-                                onPressed: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) =>
-                                          SubscribeDialog());
-                                },
-                                tooltip: "Subscribe",
-                              ),
-                            )),
-                        Flexible(
-                          flex: 2,
-                          child: LikeButton(
-                            onTap: (isLiked) {
-                              return DbOperations().onLikeButtonTapped(
-                                  isLiked, widget.showPost.id);
-                            },
-                            size: 40,
-                            circleColor: CircleColor(
-                                start: Colors.red, end: Colors.pink),
-                            bubblesColor: BubblesColor(
-                              dotPrimaryColor: Colors.pink,
-                              dotSecondaryColor: Colors.pink,
-                            ),
-                            likeBuilder: (bool isLiked) {
-                              return Icon(
-                                Icons.favorite,
-                                color: isLiked
-                                    ? Colors.deepPurpleAccent[100]
-                                    : Colors.pink,
-                                size: 30,
-                              );
-                            },
-                            likeCount: widget.showPost.likes,
-                            countBuilder:
-                                (int count, bool isLiked, String text) {
-                              var color = isLiked
-                                  ? Colors.deepPurpleAccent[100]
-                                  : Colors.pink;
-                              Widget result;
-                              if (count == 0) {
-                                result = Text(
-                                  "",
-                                  style: TextStyle(
-                                      color: Colors.pink,
-                                      fontSize: 15,
-                                      decoration: TextDecoration.none),
-                                );
-                              } else
-                                result = Text(
-                                  text,
-                                  style: TextStyle(
-                                      color: color,
-                                      fontSize: 15,
-                                      decoration: TextDecoration.none),
-                                );
+                        likeBuilder: (bool isLiked) {
+                          return Icon(
+                            Icons.favorite,
+                            color: isLiked
+                                ? Colors.deepPurpleAccent[100]
+                                : Colors.pink,
+                            size: 30,
+                          );
+                        },
+                        likeCount: widget.showPost.likes,
+                        countBuilder: (int count, bool isLiked, String text) {
+                          var color = isLiked
+                              ? Colors.deepPurpleAccent[100]
+                              : Colors.pink;
+                          Widget result;
+                          if (count == 0) {
+                            result = Text(
+                              "",
+                              style: TextStyle(
+                                  color: Colors.pink,
+                                  fontSize: 15,
+                                  decoration: TextDecoration.none),
+                            );
+                          } else
+                            result = Text(
+                              text,
+                              style: TextStyle(
+                                  color: color,
+                                  fontSize: 15,
+                                  decoration: TextDecoration.none),
+                            );
 
-                              return result;
-                            },
-                          ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-
-                        //TODO : Add logic for used to login and add a comment (nice-to-have)
-                      ],
+                          return result;
+                        },
+                      ),
                     ),
-                  ]))
+                    SizedBox(
+                      height: 30,
+                    ),
+
+                    //TODO : Add logic for used to login and add a comment (nice-to-have)
+                  ],
+                ),
+              ])
         ]);
   }
 }
